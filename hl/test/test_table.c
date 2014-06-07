@@ -16,7 +16,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "h5hltest.h"
+
+/* TODO: No statics in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
+
 #include "H5TBpublic.h"
 
 #define TEST_FILE_BE "test_table_be.h5"

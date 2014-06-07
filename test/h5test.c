@@ -25,6 +25,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "h5test.h"
+
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
 
 /* Necessary for h5_verify_cached_stabs() */

@@ -50,68 +50,6 @@ const H5std_string FILENAME("tvlstr.h5");
 const int SPACE1_RANK = 1;
 const hsize_t SPACE1_DIM1 = 4;
 
-/****************************************************************
-**
-**  test_vlstr_alloc_custom(): Test VL datatype custom memory
-**	allocation routines.  This routine just uses malloc to
-**	allocate the memory and increments the amount of memory
-**	allocated.  It is passed into setVlenMemManager.
-**
-**  Note: exact copy from the C version.
-**  (Not used now)
-****************************************************************/
-static void *test_vlstr_alloc_custom(size_t size, void *info)
-{
-    void *ret_value=NULL;	// Pointer to return
-    size_t *mem_used=(size_t *)info;  // Get the pointer to the memory used
-    size_t extra;		// Extra space needed
-
-    /*
-     *  This weird contortion is required on the DEC Alpha to keep the
-     *  alignment correct - QAK
-     */
-
-    extra=MAX(sizeof(void *),sizeof(size_t));
-
-    if((ret_value=HDmalloc(extra+size))!=NULL) {
-	*(size_t *)ret_value=size;
-	*mem_used+=size;
-    } // end if
-    ret_value = ((unsigned char *)ret_value) + extra;
-
-    return(ret_value);
-}
-
-/****************************************************************
-**
-**  test_vlstr_free_custom(): Test VL datatype custom memory
-**	allocation routines.  This routine just uses free to
-**	release the memory and decrements the amount of memory
-**	allocated.  It is passed into setVlenMemManager.
-**
-**  Note: exact copy from the C version.
-**  (Not used now)
-****************************************************************/
-static void test_vlstr_free_custom(void *_mem, void *info)
-{
-    unsigned char *mem;
-    size_t *mem_used=(size_t *)info;  // Get the pointer to the memory used
-    size_t extra;		// Extra space needed
-
-    /*
-     *  This weird contortion is required on the DEC Alpha to keep the
-     *  alignment correct - QAK
-     */
-
-    extra=MAX(sizeof(void *),sizeof(size_t));
-
-    if(_mem!=NULL) {
-        mem=((unsigned char *)_mem)-extra;
-        *mem_used-=*(size_t *)mem;
-        HDfree(mem);
-    } // end if
-}
-
 /*-------------------------------------------------------------------------
  * Function:	test_vlstring_dataset
  *

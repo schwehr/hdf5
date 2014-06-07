@@ -16,7 +16,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include "h5hltest.h"
+
+/* TODO: No statics in headers. */
+#define NO_GET_SRCDIR
+#define NO_GET_SRCDIR_FILENAME
 #include "H5srcdir.h"
+
 #include "H5DOpublic.h"
 #include <math.h>
 

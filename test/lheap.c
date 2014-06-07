@@ -20,7 +20,11 @@
  * Purpose:	Test local heaps used by symbol tables (groups).
  */
 #include "h5test.h"
+
+/* TODO: No statics should be in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
+
 #include "H5ACprivate.h"
 #include "H5HLprivate.h"
 #include "H5Iprivate.h"

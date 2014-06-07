@@ -22,7 +22,8 @@
  */
 
 /* Interface initialization */
-#define H5_INTERFACE_INIT_FUNC	H5FD_mpio_init_interface
+/* TODO: H5_INTERFACE_INIT_FUNC not used. */
+/* #define H5_INTERFACE_INIT_FUNC	H5FD_mpio_init_interface */
 
 
 #include "H5private.h"		/* Generic Functions			*/

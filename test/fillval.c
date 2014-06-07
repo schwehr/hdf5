@@ -20,6 +20,9 @@
  * Purpose:	Tests dataset fill values.
  */
 #include "h5test.h"
+
+/* TODO: No statics in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
 
 /*

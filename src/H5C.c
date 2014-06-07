@@ -166,20 +166,6 @@ static herr_t H5C_tag_entry(H5C_t * cache_ptr,
                             H5C_cache_entry_t * entry_ptr,
                             hid_t dxpl_id);
 
-static herr_t H5C_flush_tagged_entries(H5F_t * f, 
-                                       hid_t primary_dxpl_id, 
-                                       hid_t secondary_dxpl_id, 
-                                       H5C_t * cache_ptr, 
-                                       haddr_t tag);
-
-static herr_t H5C_mark_tagged_entries(H5C_t * cache_ptr, 
-                                      haddr_t tag);
-
-static herr_t H5C_flush_marked_entries(H5F_t * f, 
-                                       hid_t primary_dxpl_id, 
-                                       hid_t secondary_dxpl_id, 
-                                       H5C_t * cache_ptr);
-
 #if H5C_DO_TAGGING_SANITY_CHECKS
 static herr_t H5C_verify_tag(int id, haddr_t tag);
 #endif
@@ -9356,133 +9342,6 @@ done:
     FUNC_LEAVE_NOAPI(ret_value)
 } /* H5C_tag_entry */
 
-
-/*-------------------------------------------------------------------------
- *
- * Function:    H5C_flush_tagged_entries
- *
- * WARNING:     Not yet tested or used anywhere. (written awhile ago,
- *              will keep it around in anticipation of being used in
- *              subsequent changes to support flushing individual objects).
- *
- * Purpose:     Flushes all entries with the specified tag to disk.
- *
- * Return:      FAIL if error is detected, SUCCEED otherwise.
- *
- * Programmer:  Mike McGreevy
- *              November 3, 2009
- *
- *-------------------------------------------------------------------------
- */
-static herr_t
-H5C_flush_tagged_entries(H5F_t * f, hid_t primary_dxpl_id, hid_t secondary_dxpl_id, H5C_t * cache_ptr, haddr_t tag)
-{
-    herr_t      ret_value = SUCCEED;
-
-    FUNC_ENTER_NOAPI(FAIL)
-
-    /* Assertions */
-    HDassert(0); /* This function is not yet used. We shouldn't be in here yet. */
-    HDassert(cache_ptr != NULL);
-    HDassert(cache_ptr->magic == H5C__H5C_T_MAGIC);
-
-    /* Mark all entries with specified tag */
-    if(H5C_mark_tagged_entries(cache_ptr, tag) < 0)
-        HGOTO_ERROR(H5E_CACHE, H5E_CANTFLUSH, FAIL, "Can't mark tagged entries")
-
-    /* Flush all marked entries */
-    if(H5C_flush_marked_entries(f, primary_dxpl_id, secondary_dxpl_id, cache_ptr) < 0)
-        HGOTO_ERROR(H5E_CACHE, H5E_CANTFLUSH, FAIL, "Can't flush marked entries")
-
-done:
-    FUNC_LEAVE_NOAPI(ret_value)
-} /* H5C_flush_tagged_entries */
-
-
-/*-------------------------------------------------------------------------
- *
- * Function:    H5C_mark_tagged_entries
- *
- * WARNING:     Not yet tested or used anywhere. (written awhile ago,
- *              will keep it around in anticipation of being used in
- *              subsequent changes to support flushing individual objects).
- *
- * Purpose:     Set the flush marker on entries in the cache that have
- *              the specified tag.
- *
- * Return:      FAIL if error is detected, SUCCEED otherwise.
- *
- * Programmer:  Mike McGreevy
- *              November 3, 2009
- *
- *-------------------------------------------------------------------------
- */
-static herr_t 
-H5C_mark_tagged_entries(H5C_t * cache_ptr, haddr_t tag) 
-{
-    H5C_cache_entry_t *next_entry_ptr;  /* entry pointer */
-    unsigned u;                         /* Local index variable */
-
-    FUNC_ENTER_NOAPI_NOINIT_NOERR
-
-    /* Assertions */
-    HDassert(0); /* This function is not yet used. We shouldn't be in here yet. */
-    HDassert(cache_ptr != NULL);
-    HDassert(cache_ptr->magic == H5C__H5C_T_MAGIC);
-
-    /* Iterate through entries, marking those with specified tag. */
-    for(u = 0; u < H5C__HASH_TABLE_LEN; u++) {
-
-        next_entry_ptr = cache_ptr->index[u];
-        while(next_entry_ptr != NULL) {
-            if(next_entry_ptr->tag == tag)
-                next_entry_ptr->flush_marker = TRUE;
-
-            next_entry_ptr = next_entry_ptr->ht_next;
-        } /* end while */
-    } /* for */
-
-    FUNC_LEAVE_NOAPI(SUCCEED)
-} /* H5C_mark_tagged_entries */
-
-
-/*-------------------------------------------------------------------------
- *
- * Function:    H5C_flush_marked_entries
- *
- * WARNING:     Not yet tested or used anywhere. (written awhile ago,
- *              will keep it around in anticipation of being used in
- *              subsequent changes to support flushing individual objects).
- *
- * Purpose:     Flushes all marked entries in the cache.
- *
- * Return:      FAIL if error is detected, SUCCEED otherwise.
- *
- * Programmer:  Mike McGreevy
- *              November 3, 2009
- *
- *-------------------------------------------------------------------------
- */
-static herr_t
-H5C_flush_marked_entries(H5F_t * f, hid_t primary_dxpl_id, hid_t secondary_dxpl_id, H5C_t * cache_ptr)
-{ 
-    herr_t ret_value = SUCCEED;
-
-    FUNC_ENTER_NOAPI_NOINIT
-
-    /* Assertions */
-    HDassert(0); /* This function is not yet used. We shouldn't be in here yet. */
-    HDassert(cache_ptr != NULL);
-    HDassert(cache_ptr->magic == H5C__H5C_T_MAGIC);
-
-    /* Flush all marked entries */
-    if(H5C_flush_cache(f, primary_dxpl_id, secondary_dxpl_id,
-            H5C__FLUSH_MARKED_ENTRIES_FLAG | H5C__FLUSH_IGNORE_PROTECTED_FLAG) < 0)
-        HGOTO_ERROR(H5E_CACHE, H5E_CANTFLUSH, FAIL, "Can't flush cache")
-
-done:
-    FUNC_LEAVE_NOAPI(ret_value)
-} /* H5C_flush_marked_entries */
 
 #if H5C_DO_TAGGING_SANITY_CHECKS
 

@@ -17,7 +17,11 @@
  *              Tuesday, November 24, 1998
  */
 #include "h5test.h"
+
+/* TODO: No statics should be in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
+
 #include "H5Iprivate.h"
 
 /*

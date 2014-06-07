@@ -24,7 +24,11 @@
 #include <time.h>
 
 #include "h5test.h"
+
+/* TODO: No statics should be in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
+
 #ifdef H5_HAVE_SZLIB_H
 #   include "szlib.h"
 #endif

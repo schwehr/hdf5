@@ -43,6 +43,9 @@
 #endif
 
 #include "h5cpputil.h"	// C++ utilility header file
+
+/* TODO: No statics in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"	// srcdir querying header file
 
 const H5std_string    TESTFILE("th5s.h5");

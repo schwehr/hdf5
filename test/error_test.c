@@ -20,6 +20,9 @@
  * Purpose:	Tests the error API routines.
  */
 #include "h5test.h"
+
+/* TODO: No statics in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
 
 #ifdef H5_USE_16_API

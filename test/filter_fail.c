@@ -22,6 +22,13 @@
  */
 
 #include "h5test.h"
+
+/* TODO: No statics should be in headers. */
+#define NO_GET_SRCDIR
+
+/* TODO: No statics should be in headers. */
+#define NO_GET_SRCDIR
+#define NO_GET_SRCDIR_FILENAME
 #include "H5srcdir.h"
 
 #define DSET_NAME 		"dset_fail"

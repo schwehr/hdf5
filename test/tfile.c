@@ -23,6 +23,9 @@
 
 #include "hdf5.h"
 #include "testhdf5.h"
+
+/* TODO: No statics should be in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
 
 #include "H5Bprivate.h"

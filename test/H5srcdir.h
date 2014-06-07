@@ -25,6 +25,9 @@
 /* Include the header file with the correct relative path for the srcdir string */
 #include "H5srcdir_str.h"
 
+
+/* TODO: Should not have statics in a header.  Make a H5srcdir.c. */
+
 /* Buffer to construct path in and return pointer to */
 static char srcdir_path[1024] = "";
 
@@ -32,6 +35,10 @@ static char srcdir_path[1024] = "";
 static char srcdir_testpath[1024] = "";
 
 /* Append the test file name to the srcdir path and return the whole string */
+
+/* TODO: This should be in a source file, not a header. */
+#ifndef NO_GET_SRCDIR_FILENAME
+
 #ifdef H5_VMS
 static const char *H5_get_srcdir_filename(char *filename)
 #else
@@ -65,7 +72,11 @@ static const char *H5_get_srcdir_filename(const char *filename)
         return(NULL);
 }
 
+#endif /* TODO: NO_GET_SRCDIR_FILENAME */
+
 /* Just return the srcdir path */
+/* TODO: This should be in a source file, not a header. */
+#ifndef NO_GET_SRCDIR
 static const char *H5_get_srcdir(void)
 {
     const char *srcdir = HDgetenv("srcdir");
@@ -82,5 +93,7 @@ static const char *H5_get_srcdir(void)
     else
         return(NULL);
 }
+#endif /* NO_GET_SRCDIR */
+
 #endif /* _H5SRCDIR_H */
 

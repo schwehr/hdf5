@@ -20,6 +20,9 @@
  * Purpose:	Tests datasets stored in external raw files.
  */
 #include "h5test.h"
+
+/* TODO: No statics in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
 
 /* File for external link test.  Created with gen_udlinks.c */

@@ -24,7 +24,8 @@
 #define H5T_PACKAGE		/*suppress error about including H5Tpkg	     */
 
 /* Interface initialization */
-#define H5_INTERFACE_INIT_FUNC	H5T_init_conv_interface
+/* TODO: H5_INTERFACE_INIT_FUNC not used. */
+/* #define H5_INTERFACE_INIT_FUNC	H5T_init_conv_interface */
 
 
 /***********/
@@ -981,6 +982,9 @@ DESCRIPTION
     Initializes any interface-specific data or routines.  (Just calls
     H5T_init() currently).
 --------------------------------------------------------------------------*/
+
+#if 0
+/* TODO: H5_INTERFACE_INIT_FUNC not used. */
 static herr_t
 H5T_init_conv_interface(void)
 {
@@ -988,7 +992,7 @@ H5T_init_conv_interface(void)
 
     FUNC_LEAVE_NOAPI(H5T_init())
 } /* H5T_init_conv_interface() */
-
+#endif
 
 /*-------------------------------------------------------------------------
  * Function:	H5T__conv_noop

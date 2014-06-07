@@ -23,7 +23,8 @@
  */
 
 /* Interface initialization */
-#define H5_INTERFACE_INIT_FUNC  H5FD_direct_init_interface
+/* TODO: H5_INTERFACE_INIT_FUNC not used. */
+/* #define H5_INTERFACE_INIT_FUNC  H5FD_direct_init_interface */
 
 /* For system function posix_memalign - Commented it out because copper isn't able to compile
  * this file. */

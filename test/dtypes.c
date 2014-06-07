@@ -23,7 +23,11 @@
 #include <math.h>
 #include <time.h>
 #include "h5test.h"
+
+/* TODO: No statics should be in headers. */
+#define NO_GET_SRCDIR
 #include "H5srcdir.h"
+
 #include "H5Iprivate.h"     /* For checking that datatype id's don't leak */
 
 /* Number of elements in each test */
